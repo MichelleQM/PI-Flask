@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia turistica (PI)</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/styles.css" rel="stylesheet" />
+    <style>
+        /* Estilos para las imágenes */
+        #destinationImages img {
+            max-width: 500px; /* Tamaño máximo de las imágenes */
+            margin-right: 10px; /* Espacio entre las imágenes y el texto */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="templates/index.html">Guia Turistica</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/about">Actividades</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/post">Estadía</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/contact">Comentarios</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Page Header-->
+    <header class="masthead" style="background-image: url('static/assets/img/contact-bg.jpg')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="page-heading">
+                        <h1>Comentarios y referencias</h1>
+                        <span class="subheading">Comparte tus experiencias con nuestros usuarios!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content-->
+    <main class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <!-- Barra de selección de destinos -->
+            <div class="row gx-4 gx-lg-5 justify-content-center mb-4">
+                <div class="col-md-6">
+                    <select id="destinationSelect" class="form-control">
+                        <option value="">¿Donde has estado?...</option>
+                        <option value="Centro Histórico de Querétaro">Centro Histórico de Querétaro</option>
+                        <option value="Peña de Bernal">Peña de Bernal</option>
+                        <option value="Viñedos y Ruta del Vino">Viñedos y Ruta del Vino</option>
+                        <option value="Santiago de Querétaro">Santiago de Querétaro</option>
+                        <option value="Termas de San Joaquín">Termas de San Joaquín</option>
+                        <option value="Ruta de los Conventos">Ruta de los Conventos</option>
+                        <option value="Sierra Gorda de Querétaro">Sierra Gorda de Querétaro</option>
+                        <option value="Cascada el Chuveje">Cascada el Chuveje</option>
+                        <option value="Paseo en globo aerostático">Paseo en globo aerostático</option>
+                        <option value="Museos y galerías de arte">Museos y galerías de arte</option>
+                    </select>
+                </div>
+            </div>
+            <!-- Información del destino seleccionado -->
+            <div id="destinationInfo" style="display: none;">
+                <h2 id="destinationTitle"></h2>
+                <div class="row">
+                    <div class="col-md-6" id="destinationImages"></div> <!-- Contenedor para las imágenes -->
+                    <div class="col-md-6">
+                        <p id="destinationDescription"></p>
+                    </div>
+                </div>
+                
+                <!-- Elemento de calificación con estrellas -->
+                <div class="rating" id="ratingStars" style="display: none;">
+                    <span>Calificación:</span>
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5"></label>
+                    <input type="radio" id="star4" name="rating" value="4">
+                    <label for="star4"></label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3"></label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2"></label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1"></label>
+                </div>
+
+                <!-- Formulario de Comentarios -->
+                <div id="commentForm" style="display: none;">
+                    <h2>Cuentanos tu experiencia!</h2>
+                    <textarea id="comment" class="form-control" placeholder="Escribe tu comentario aquí"></textarea>
+                    <button class="btn btn-primary mt-3" onclick="submitComment()">Enviar Comentario</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="static/js/scripts.js"></script>
+    <script>
+        // Datos de ejemplo para las descripciones de los destinos y las imágenes correspondientes
+        var destinationDescriptions = {
+            "Centro Histórico de Querétaro": "Recorre sus calles empedradas, visita la Plaza de Armas, la Casa de la Corregidora, la Catedral de Querétaro y otros edificios históricos.",
+            "Peña de Bernal": "Escala o camina hasta la tercera formación monolítica más grande del mundo, ubicada en el Pueblo Mágico de Bernal. Desde la cima, disfrutarás de impresionantes vistas panorámicas.",
+            "Viñedos y Ruta del Vino": "Visita las diferentes bodegas y viñedos de la región de Querétaro, como Freixenet, La Redonda, Finca Sala Vive, entre otros, y degusta vinos locales.",
+            "Santiago de Querétaro": "Explora los diferentes barrios y rincones de la ciudad, como el Barrio de la Cruz, el Barrio de San Sebastián, el Barrio de La Piedad, entre otros.",
+            "Termas de San Joaquín": "Relájate en las aguas termales de este balneario ubicado en el municipio de San Joaquín, rodeado de un entorno natural impresionante.",
+            "Ruta de los Conventos": "Visita los distintos conventos y exconventos que datan de la época colonial, como el Convento de San Francisco en Jalpan de Serra, el Convento de Santa Cruz en Tancoyol, entre otros.",
+            "Sierra Gorda de Querétaro": "Explora la belleza natural de la Sierra Gorda, donde encontrarás cascadas, ríos, grutas y una diversidad de flora y fauna.",
+            "Cascada el Chuveje": "Haz una caminata por la selva para llegar a esta impresionante cascada de más de 30 metros de altura, ubicada en la Sierra Gorda de Querétaro.",
+            "Paseo en globo aerostático": "Disfruta de un emocionante paseo en globo aerostático sobre los paisajes de Querétaro al amanecer o al atardecer.",
+            "Museos y galerías de arte": "Visita lugares como el Museo Regional de Querétaro, el Museo de la Ciudad, la Galería Libertad y otros espacios culturales para conocer más sobre la historia y el arte de la región."
+        };
+
+        // Imágenes correspondientes a cada destino
+        var destinationImages = {
+            "Centro Histórico de Querétaro": ["queretaro1.jpg"],
+            "Peña de Bernal": ["bernal1.jpg"],
+            "Viñedos y Ruta del Vino": ["vinos1.jpg"],
+            "Santiago de Querétaro": ["santiago1.jpg"],
+            "Termas de San Joaquín": ["termas1.jpg"],
+            "Ruta de los Conventos": ["conventos1.jpg"],
+            "Sierra Gorda de Querétaro": ["sierra_gorda1.jpg"],
+            "Cascada el Chuveje": ["chuveje1.jpg"],
+            "Paseo en globo aerostático": ["globo1.jpg"],
+            "Museos y galerías de arte": ["museos1.jpg"]
+        };
+
+        // Función para mostrar la información del destino seleccionado
+        function showDestinationInfo(destination) {
+            var destinationInfo = document.getElementById("destinationInfo");
+            var destinationTitle = document.getElementById("destinationTitle");
+            var destinationDescription = document.getElementById("destinationDescription");
+            var destinationImagesContainer = document.getElementById("destinationImages");
+            var ratingStars = document.getElementById("ratingStars");
+            var commentForm = document.getElementById("commentForm");
+
+            if (destination in destinationDescriptions) {
+                destinationTitle.textContent = destination;
+                destinationDescription.textContent = destinationDescriptions[destination];
+
+                // Limpiar el contenedor de imágenes
+                destinationImagesContainer.innerHTML = "";
+
+                // Agregar las imágenes correspondientes
+                destinationImages[destination].forEach(function(image) {
+                    var imgElement = document.createElement("img");
+                    imgElement.src = "assets/img/" + image;
+                    imgElement.alt = destination;
+                    destinationImagesContainer.appendChild(imgElement);
+                });
+
+                // Mostrar el elemento de calificación con estrellas
+                ratingStars.style.display = "block";
+                // Mostrar el formulario de comentarios
+                commentForm.style.display = "block";
+                destinationInfo.style.display = "block";
+            } else {
+                // Ocultar el elemento de calificación con estrellas si no hay descripción para el destino seleccionado
+                ratingStars.style.display = "none";
+                // Ocultar el formulario de comentarios si no hay descripción para el destino seleccionado
+                commentForm.style.display = "none";
+                destinationInfo.style.display = "none";
+            }
+        }
+
+        // Event listener para el cambio en la selección de destino
+        var destinationSelect = document.getElementById("destinationSelect");
+        destinationSelect.addEventListener("change", function() {
+            var selectedDestination = this.value;
+            showDestinationInfo(selectedDestination);
+        });
+
+        // Función para enviar comentario
+        function submitComment() {
+            var comment = document.getElementById("comment").value;
+            var rating = document.querySelector('input[name="rating"]:checked').value;
+            // Aquí puedes realizar cualquier acción con el comentario y la calificación, como enviarlos a un servidor o mostrarlos en la página
+            console.log("Comentario:", comment);
+            console.log("Calificación:", rating);
+            // Por ahora, simplemente mostramos una alerta con el comentario y la calificación
+            alert("Comentario: " + comment + "\nCalificación: " + rating);
+        }
+    </script>
+</body>
+</html>
