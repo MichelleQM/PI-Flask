@@ -7,46 +7,49 @@
     <meta name="author" content="" />
     <title>Guía Turística</title>
     <style>
-
+        /* Estilos personalizados */
         .post-title {
-            font-family: 'Arial', serif; /* Cambia la fuente para el título */
-            font-size: 2em; /* Ajusta el tamaño del título */
-            color: #254821; /* Color del texto del título */
-            margin-bottom: 10px; /* Espacio debajo del título */
+            font-family: 'Poppins', sans-serif; /* Cambia la fuente para el título */
+            font-size: 2.5em; /* Ajusta el tamaño del título */
+            color: #2c3e50; /* Color del texto del título */
+            margin-bottom: 20px; /* Espacio debajo del título */
         }
         .post-subtitle {
-            font-family: 'Arial', sans-serif; /* Cambia la fuente para el subtítulo */
-            font-size: 5 em; /* Ajusta el tamaño del subtítulo */
-            color: #374e54; /* Color del texto del subtítulo */
-            line-height: 1.5; /* Altura de línea para mejor legibilidad */
+            font-family: 'Lora', serif; /* Cambia la fuente para el subtítulo */
+            font-size: 1.25em; /* Ajusta el tamaño del subtítulo */
+            color: #34495e; /* Color del texto del subtítulo */
+            line-height: 1.7; /* Altura de línea para mejor legibilidad */
             text-align: justify; /* Justifica el texto */
-            max-width: 1000%; /* Ancho máximo del subtítulo */
-            margin: Auto; /* Centra el subtítulo dentro del contenedor */
+            margin-bottom: 20px; /* Espacio debajo del subtítulo */
         }
         /* Estilos para los bloques de texto e imagen */
         .post-preview {
             display: flex;
-            align-items: flex-start;
-            margin-bottom: 20px; /* Ajusta el espacio entre las secciones si es necesario */
+            flex-direction: column; /* Cambia la dirección del flexbox a columna */
+            align-items: center; /* Centra los elementos en el eje vertical */
+            margin-bottom: 40px; /* Ajusta el espacio entre las secciones */
         }
         .post-preview .post-content {
-            flex: 1;
+            max-width: 600px; /* Ancho máximo del contenido */
+            text-align: center; /* Centra el texto */
+            margin-bottom: 20px; /* Espacio debajo del contenido */
         }
         .post-preview .post-image {
-            margin-left: 20px; /* Espacio entre el texto y la imagen */
-            flex-shrink: 0;
+            width: 100%;
+            max-width: 600px; /* Ancho máximo de la imagen */
+            height: auto;
         }
         .post-preview .post-image img {
-            max-width: 100%;
+            width: 100%;
             height: auto;
+            border-radius: 10px; /* Bordes redondeados para las imágenes */
         }
     </style>
     <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="static/css/styles.css" rel="stylesheet" />
 </head>
@@ -97,7 +100,7 @@
                         </a>
                     </div>
                     <div class="post-image">
-                        <img src="static/assets/img/sample-image1.jpg" alt="Descripción de la imagen" />
+                        <img src="static/assets/img/somos.jpg" alt="aaaaa" />
                     </div>
                 </div>
                 <!-- Divider-->
@@ -113,7 +116,7 @@
                         </a>
                     </div>
                     <div class="post-image">
-                        <img src="static/assets/img/sample-image2.jpg" alt="Descripción de la imagen" />
+                        <img src="static/assets/img/mision.jpg" alt="Descripción de la imagen" />
                     </div>
                 </div>
                 <!-- Divider-->
@@ -131,7 +134,7 @@
                         </a>
                     </div>
                     <div class="post-image">
-                        <img src="static/assets/img/sample-image3.jpg" alt="Descripción de la imagen" />
+                        <img src="static/assets/img/ofrecerte.jpg" alt="Descripción de la imagen" />
                     </div>
                 </div>
                 <!-- Divider-->
