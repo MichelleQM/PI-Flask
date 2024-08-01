@@ -69,6 +69,15 @@
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/about">Actividades</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/post">Estadía</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/contact">Comentarios</a></li>
+<<<<<<< Updated upstream
+=======
+                    {% if session.get('user_id') %}
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/logout">Cerrar sesión</a></li>
+                    {% else %}
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/login">Iniciar sesión</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/register">Registrarse</a></li>
+                    {% endif %}
+>>>>>>> Stashed changes
                 </ul>
             </div>
         </div>
@@ -142,7 +151,11 @@
                 <hr class="my-4" />
                 <!-- Pager-->
                 <div class="d-flex justify-content-end mb-4">
+<<<<<<< Updated upstream
                     <a class="btn btn-primary text-uppercase" href="templates/about.html">Descubre las actividades que te esperan! →</a>
+=======
+                    <a class="btn btn-primary text-uppercase" href="about">Descubre las actividades que te esperan! →</a>
+>>>>>>> Stashed changes
                 </div>
             </div>
         </div>
