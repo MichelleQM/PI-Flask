@@ -8,6 +8,14 @@
     <title>Guía Turística</title>
     <style>
         /* Estilos personalizados */
+        .container h4 {
+            margin-bottom: 20px;
+            font-size: 35px;
+            color: #ffffff;
+            /* Aplicamos la fuente Pacifico solo al h2 que contiene "Guia Turistica" */
+            font-family: 'Pacifico', cursive;
+        }
+
         .post-title {
             font-family: 'Poppins', sans-serif; /* Cambia la fuente para el título */
             font-size: 2.5em; /* Ajusta el tamaño del título */
@@ -50,6 +58,7 @@
     <!-- Font Awesome icons (free version)-->
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="static/css/styles.css" rel="stylesheet" />
@@ -58,7 +67,7 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="templates/index.html">QuerétaroDescubre</a>
+            <a class="navbar-brand" href="templates/index.html"><h4>QuerétaroDescubre</h4></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
