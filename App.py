@@ -15,9 +15,39 @@ def get_db_connection():
 def index():
     return render_template('index.html')
 
+
 @app.route('/post')
 def post():
-    return render_template('post.html')
+    conn = get_db_connection()  # Usa la función get_db_connection
+    cursor = conn.cursor()
+    cursor.execute('SELECT id_destino, nombre_destino FROM Destinos')
+    places = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return render_template('post.html', places=places)
+
+@app.route('/hoteles', methods=['GET'])
+def hoteles():
+    id_destino = request.args.get('id_destino', type=int)
+    conn = get_db_connection()  # Usa la función get_db_connection
+    cursor = conn.cursor()
+    cursor.execute('SELECT nombre_hotel, descripcion, url_pagina, url_img, dato1, dato2 FROM Hoteles WHERE id_destino = ?', (id_destino,))
+    hoteles = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    hoteles_list = [{
+        'nombre_hotel': hotel[0],
+        'descripcion': hotel[1],
+        'url_pagina': hotel[2],
+        'url_img': hotel[3],
+        'dato1': hotel[4],
+        'dato2': hotel[5]
+    } for hotel in hoteles]
+    return jsonify(hoteles_list)
+
+
+
+
 
 @app.route('/contact')
 def contact():
@@ -29,7 +59,21 @@ def comentarios():
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    cursor.execute("SELECT id_destino, nombre_destino FROM Destinos")
+    destinos = cursor.fetchall()
+    connection.close()
+
+    destinos_list = [
+        {
+            "id_destino": row[0],
+            "nombre_destino": row[1]
+        }
+        for row in destinos
+    ]
+    return render_template('about.html', destinos=destinos_list)
+
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -103,9 +147,9 @@ def get_destinations():
 
     images = {
         1: "bernal1.jpg",
-        5: "sierra_gorda1.jpg",
-        6: "chuveje1.jpg",
-        7: "termas1.jpg"
+        2: "termas1.jpg",
+        3: "sierra_gorda1.jpg",
+        4: "chuveje1.jpg"
         # Agrega más mapeos según sea necesario
     }
 
@@ -208,6 +252,51 @@ def edit_comment():
     connection.close()
 
     return jsonify({"status": "success"})
+
+
+
+
+@app.route('/get_activities/<int:id_destino>', methods=['GET'])
+def get_activities(id_destino):
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    cursor.execute("""
+        SELECT id_actividad, nombre_actividad, descripcion, duracion, costos
+        FROM Actividades
+        WHERE id_destino = ?
+    """, (id_destino,))
+    activities = cursor.fetchall()
+    connection.close()
+
+    images = {
+        1: "Bernal.webp",
+        2: "tallerBernal.png",
+        3: "vinelloBernal.png",
+        4: "AguaTermalesSanJoaquin.png",
+        5: "LuciernagasSanJoaquin.jpg",
+        6: "ReforestacionSanJoaquin.png",
+        7: "AveSierraGorda.jpg",
+        8: "sierraGorda.png",
+        9: "EcoturismoSierra.png",
+        10: "LimpiezaSenderoChuveje.png",
+        11: "ConservacionAguaChuveje.png",
+        12: "CampamentoChuveje.png"
+        # Agrega más mapeos según sea necesario
+    }
+
+    activities_list = [
+        {
+            "id_actividad": row[0],
+            "nombre_actividad": row[1],
+            "descripcion": row[2],
+            "duracion": row[3],
+            "costos": row[4],
+            "image": url_for('static', filename='assets/' + images.get(row[0], "placeholder.jpg"))
+        }
+        for row in activities
+    ]
+    return jsonify(activities_list)
+
 
 
 
