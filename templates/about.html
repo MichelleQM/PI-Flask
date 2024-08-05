@@ -1,35 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <style>
+        .navbar-brand h5 {
+            font-family: 'Pacifico', cursive;
+        }
         .container h5 {
-        margin-bottom: 20px;
-        font-size: 35px;
-        color: #ffffff;
-        /* Aplicamos la fuente Pacifico solo al h2 que contiene "Guia Turistica" */
-        font-family: 'Pacifico', cursive;
-    }</style>
+            margin-bottom: 20px;
+            font-size: 35px;
+            color: #ffffff;
+            font-family: 'Pacifico', cursive;
+        }
+
+        .card-img-top {
+            object-fit: cover;
+            height: 200px;
+        }
+
+        .card-deck {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+    </style>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Guia Turistica (PI)</title>
-    <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
-    <!-- Font Awesome icons (free version)-->
+    <title>QueretaroDescubre</title>
+    <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
-     
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="static/css/styles.css" rel="stylesheet" />
-</head>
+    <link href="/static/css/styles.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"></head>
+
 <body>
-    <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="templates/index.html"><h5>QuerétaroDescubre</h5></a>
+            <a class="navbar-brand" href="/"><h5>QuerétaroDescubre</h5></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 Menu
                 <i class="fas fa-bars"></i>
@@ -37,7 +50,6 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ms-auto py-4 py-lg-0">
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/">Inicio</a></li>
-                   
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/post">Estadía</a></li>
                     <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/contact">Comentarios</a></li>
                     {% if session.get('user_id') %}
@@ -50,34 +62,52 @@
             </div>
         </div>
     </nav>
-    <!-- Page Header-->
-    <header class="masthead" style="background-image: url('static/assets/img/about-bg.jpg')">
+
+    <header class="masthead" style="background-image: url('/static/assets/img/about-bg.jpg')">
         <div class="container position-relative px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <div class="page-heading">
                         <h1>Actividades</h1>
-                        <span class="subheading">Encuentra un plan para ti!.</span>
+                        <span class="subheading">Encuentra un plan para ti!</span>
+                        <div class="subheading">Maravillate entre las diferentes opciones de nuestros destinos</div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-    <!-- Main Content-->
+    <main class="mb-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <h2>¿Qué hacer en Querétaro?</h2>
+                    <p>Querétaro es un estado lleno de historia, cultura y naturaleza. Aquí encontrarás una gran
+                        variedad de actividades para disfrutar en compañía de tus seres queridos. Desde recorrer el
+                        Centro Histórico de la capital, hasta explorar la Sierra Gorda y sus maravillas naturales, hay
+                        algo para todos los gustos. A continuación te presentamos algunas de las actividades más
+                        populares que puedes realizar en Querétaro:</p>
+                    <ul>
+                        <li>Escalar la Peña de Bernal, el segundo monolito más grande del mundo.</li>
+                        <li>Relajarte en las Termas de San Joaquín y disfrutar de sus aguas termales.</li>
+                        <li>Explorar la Sierra Gorda de Querétaro y sus paisajes naturales.</li>
+                        <li>Conocer la Cascada el Chuveje y otras cascadas de la región.</li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                    <img class="img-fluid" src="/static/assets/img/actividades/actividades.png" alt="Actividades en Querétaro" />
+                </div>
+            </div>
+        </div>
+    </main>
     <main class="mb-4">
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <select id="destino" name="destino">
-                        <option value="centro-historico">Centro Histórico de Querétaro</option>
                         <option value="pena-de-bernal">Peña de Bernal</option>
-                        <option value="ruta-del-vino">Viñedos y Ruta del Vino</option>
                         <option value="termas-san-joaquin">Termas de San Joaquín</option>
-                        <option value="ruta-conventos">Ruta de los Conventos</option>
                         <option value="sierra-gorda">Sierra Gorda de Querétaro</option>
                         <option value="cascada-el-chuveje">Cascada el Chuveje</option>
-                        <option value="paseo-en-globo">Paseo en Globo Aerostático</option>
-                        <option value="museos-galerias">Museos y Galerías de Arte</option>
                     </select>
                     <div id="actividades" class="mt-4">
                         <!-- Aquí se mostrarán las actividades según el destino seleccionado -->
@@ -86,7 +116,9 @@
             </div>
         </div>
     </main>
-    <!-- Footer-->
+    <div id="cardDecks" class="card-deck">
+        <!-- Aquí se mostrarán los card decks según la selección -->
+    </div>
     <footer class="border-top">
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -122,38 +154,201 @@
             </div>
         </div>
     </footer>
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="static/js/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="/static/js/scripts.js"></script>
 
-    <!-- Script para manejar la selección de destino y mostrar actividades -->
     <script>
-        document.getElementById('destino').addEventListener('change', function() {
+        document.getElementById('destino').addEventListener('change', function () {
             var destinoSeleccionado = this.value;
-            var actividadesDiv = document.getElementById('actividades');
-            if (destinoSeleccionado === 'centro-historico') {
-                actividadesDiv.innerHTML = "<h2>Centro Histórico de Querétaro</h2><img src='static/assets/centro-historico.jpg' alt='Centro Histórico de Querétaro' style='float:right;width:300px;height:200px;'><p>Recorre sus calles empedradas, visita la Plaza de Armas, la Casa de la Corregidora, la Catedral de Querétaro y otros edificios históricos.</p>";
-            } else if (destinoSeleccionado === 'pena-de-bernal') {
-                actividadesDiv.innerHTML = "<h2>Peña de Bernal</h2><img src='static/assets/pena-de-bernal.jpg' alt='Peña de Bernal' style='float:right;width:300px;height:200px;'><p>Escala o camina hasta la tercera formación monolítica más grande del mundo, ubicada en el Pueblo Mágico de Bernal. Desde la cima, disfrutarás de impresionantes vistas panorámicas.</p>";
-            } else if (destinoSeleccionado === 'ruta-del-vino') {
-                actividadesDiv.innerHTML = "<h2>Viñedos y Ruta del Vino</h2><img src='static/assets/ruta-del-vino.jpg' alt='Viñedos y Ruta del Vino' style='float:right;width:300px;height:200px;'><p>Visita las diferentes bodegas y viñedos de la región de Querétaro, como Freixenet, La Redonda, Finca Sala Vive, entre otros, y degusta vinos locales.</p>";
+            var cardDecksDiv = document.getElementById('cardDecks');
+            if (destinoSeleccionado === 'pena-de-bernal') {
+                cardDecksDiv.innerHTML = `
+                <div class="card-deck">
+                    <div class="card">
+                        <img class="card-img-top" src="/static/assets/img/actividades/Bernal.webp" alt="Senderismo y Escalada con Guías Locales">
+                            <div class="card-body">
+                            <h5 class="card-title">Senderismo y Escalada con Guías Locales</h5>
+                        <p class="card-text">Descubre la magia de la Peña de Bernal a través de emocionantes actividades al aire libre, como el senderismo y la escalada. Nuestros guías locales expertos te llevarán a explorar la belleza natural de este monolito, uno de los más grandes del mundo. La caminata hacia la cima ofrece vistas panorámicas espectaculares y una experiencia única. ¡No te lo pierdas!</p>
+                    </div>
+                            <div class="card-footer">
+                        <small class="text-muted">Horario: 10:00 am a 5:00 pm L-D</small>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Costo: $50.00 mxn</small>
+                    </div>
+                </div>
+
+                    <div class="card">
+                        <img class="card-img-top" src="/static/assets/img/actividades/tallerBernal.png" alt="Talleres de Artesanías Locales">
+                        <div class="card-body">
+                            <h5 class="card-title">Talleres de Artesanías Locales</h5>
+                            <p class="card-text">Asistir a talleres de fabricación de artesanías con materiales locales y sostenibles, promoviendo la cultura y las prácticas tradicionales</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Horario: 10:00 am a 7:00 pm L-D (puede variar dependiendo de cada tienda)</small>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Costo: $$ (Varia)</small>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img class="card-img-top" src="/static/assets/img/actividades/vinelloBernal.png" alt="Visitas a Viñedos Orgánicos">
+                        <div class="card-body">
+                            <h5 class="card-title">Visitas a Viñedos Orgánicos</h5>
+                            <p class="card-text">Explorar viñedos que practican agricultura orgánica y sostenible, aprendiendo sobre técnicas de cultivo respetuosas con el medio ambiente.</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Horario: 11:00 am a 6:00 pm L-D</small>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Costo: $250.00 a $750.00 mxn</small>
+                        </div>
+                    </div>
+                </div>
+
+                `;
             } else if (destinoSeleccionado === 'termas-san-joaquin') {
-                actividadesDiv.innerHTML = "<h2>Termas de San Joaquín</h2><img src='static/assets/termas-san-joaquin.jpg' alt='Termas de San Joaquín' style='float:right;width:300px;height:200px;'><p>Relájate en las aguas termales de este balneario ubicado en el municipio de San Joaquín, rodeado de un entorno natural impresionante.</p>";
-            } else if (destinoSeleccionado === 'ruta-conventos') {
-                actividadesDiv.innerHTML = "<h2>Ruta de los Conventos</h2><img src='static/assets/ruta-conventos.jpg' alt='Ruta de los Conventos' style='float:right;width:300px;height:200px;'><p>Visita los distintos conventos y exconventos que datan de la época colonial, como el Convento de San Francisco en Jalpan de Serra, el Convento de Santa Cruz en Tancoyol, entre otros.</p>";
+                cardDecksDiv.innerHTML = `
+                    <div class="card-deck">
+                    <div class="card">
+                        <img class="card-img-top" src="/static/assets/img/actividades/AguaTermalesSanJoaquin.png" alt="Baños Termales con Energía Sostenible">
+                            <div class="card-body">
+                            <h5 class="card-title">Baños Termales con Energía Sostenible</h5>
+                        <p class="card-text">Disfrutar de las aguas termales alimentadas por fuentes geotérmicas, mientras te informas sobre las prácticas de eficiencia energética en el manejo de las instalaciones.</p>
+                    </div>
+                            <div class="card-footer">
+                        <small class="text-muted">Horario: 9:00 am a 5:00 pm M-D</small>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Costo: $270.00 mxn por persona</small>
+                    </div>
+                </div>
+
+                    <div class="card">
+                        <img class="card-img-top" src="/static/assets/img/actividades/LuciernagasSanJoaquin.jpg" alt="Rutas de Observación de Fauna y Flora">
+                        <div class="card-body">
+                            <h5 class="card-title">Sendero de historias y luciérnagas</h5>
+                            <p class="card-text">El Sendero del Camino Real es una ruta de nueve kilómetros que comienza en el llamado Puerto de las Pilas, en la cabecera municipal de San Joaquín.</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Horario: 10:00 am a 5:00 pm M-D</small>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Costo: $$ (puede variar)</small>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img class="card-img-top" src="/static/assets/img/actividades/ReforestacionSanJoaquin.png" alt="Jornadas de Reforestación">
+                        <div class="card-body">
+                            <h5 class="card-title">Jornadas de Reforestación</h5>
+                            <p class="card-text">Participa en actividades de reforestación y mantenimiento de áreas verdes en los alrededores, ayudando a restaurar el ecosistema local.</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Horario: Los horarios y dias pueden variar dependiendo del evento</small>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Costo: Gratis</small>
+                        </div>
+                    </div>
+                </div>
+                `;
             } else if (destinoSeleccionado === 'sierra-gorda') {
-                actividadesDiv.innerHTML = "<h2>Sierra Gorda de Querétaro</h2><img src='static/assets/sierra-gorda.jpg' alt='Sierra Gorda de Querétaro' style='float:right;width:300px;height:200px;'><p>Explora la belleza natural de la Sierra Gorda, donde encontrarás cascadas, ríos, grutas y una diversidad de flora y fauna.</p>";
+                cardDecksDiv.innerHTML = `
+                    <div class="card-deck">
+                    <div class="card">
+                        <img class="card-img-top" src="/static/assets/img/actividades/AveSierraGorda.jpg" alt="Observación de Aves y Vida Silvestre">
+                            <div class="card-body">
+                            <h5 class="card-title">Observación de Aves y Vida Silvestre</h5>
+                        <p class="card-text">Unirse a tours guiados para la observación de aves y otros animales, respetando las normas de protección de la vida silvestre y aprendiendo sobre especies en peligro de extinción</p>
+                    </div>
+                            <div class="card-footer">
+                        <small class="text-muted">Horario: 10:00 am a 4:00 pm J-D</small>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Costo: $250.00 a $550.00 mxn</small>
+                    </div>
+                </div>
+
+                    <div class="card">
+                        <img class="card-img-top" src="/static/assets/img/actividades/sierraGorda.png" alt="Visitas a Proyectos de Conservación">
+                        <div class="card-body">
+                            <h5 class="card-title">Visitas a Proyectos de Conservación</h5>
+                            <p class="card-text">Conocer proyectos de conservación y manejo de recursos naturales, como los programas de conservación de jaguares y otras especies.</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Horario: Puede variar</small>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Costo: Gratis</small>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img class="card-img-top" src="/static/assets/img/actividades/EcoturismoSierra.png" alt="Ecoturismo Comunitario">
+                        <div class="card-body">
+                            <h5 class="card-title">Ecoturismo Comunitario</h5>
+                            <p class="card-text">Participar en experiencias organizadas por comunidades locales, promoviendo el turismo responsable y la preservación cultural.</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Horario: 10:00 am a 7:00 pm L-D</small>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Costo: $$ (varia)</small>
+                        </div>
+                    </div>
+                </div>
+                `;
             } else if (destinoSeleccionado === 'cascada-el-chuveje') {
-                actividadesDiv.innerHTML = "<h2>Cascada el Chuveje</h2><img src='static/assets/cascada-el-chuveje.jpg' alt='Cascada el Chuveje' style='float:right;width:300px;height:200px;'><p>Haz una caminata por la selva para llegar a esta impresionante cascada de más de 30 metros de altura, ubicada en la Sierra Gorda de Querétaro.</p>";
-            } else if (destinoSeleccionado === 'paseo-en-globo') {
-                actividadesDiv.innerHTML = "<h2>Paseo en Globo Aerostático</h2><img src='static/assets/paseo-en-globo.jpg' alt='Paseo en Globo Aerostático' style='float:right;width:300px;height:200px;'><p>Disfruta de un emocionante paseo en globo aerostático sobre los paisajes de Querétaro al amanecer o al atardecer.</p>";
-            } else if (destinoSeleccionado === 'museos-galerias') {
-                actividadesDiv.innerHTML = "<h2>Museos y Galerías de Arte</h2><img src='static/assets/museos-galerias.jpg' alt='Museos y Galerías de Arte' style='float:right;width:300px;height:200px;'><p>Visita lugares como el Museo Regional de Querétaro, el Museo de la Ciudad, la Galería Libertad y otros espacios culturales para conocer más sobre la historia y el arte de la región.</p>";
-            } else {
-                actividadesDiv.innerHTML = "<p>Selecciona una actividad para más información.</p>";
+                cardDecksDiv.innerHTML = `
+                    <div class="card-deck">
+                    <div class="card">
+                        <img class="card-img-top" src="/static/assets/img/actividades/LimpiezaSenderoChuveje.png" alt="Senderismo y Limpieza de Senderos">
+                            <div class="card-body">
+                            <h5 class="card-title">Senderismo y Limpieza de Senderos</h5>
+                        <p class="card-text">Realizar caminatas por los senderos hacia la cascada y participar en actividades de limpieza y mantenimiento de las rutas, contribuyendo a la conservación del entorno</p>
+                    </div>
+                            <div class="card-footer">
+                        <small class="text-muted">Horario: 12:00 am a 5:00 pm J-D</small>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Costo: Gratis</small>
+                    </div>
+                </div>
+
+                    <div class="card">
+                        <img class="card-img-top" src="/static/assets/img/actividades/ConservacionAguaChuveje.png" alt="Pláticas Educativas sobre Conservación del Agua">
+                        <div class="card-body">
+                            <h5 class="card-title">Pláticas Educativas sobre Conservación del Agua</h5>
+                            <p class="card-text">Asistir a charlas sobre la importancia de la conservación de recursos hídricos y las prácticas sostenibles para proteger las fuentes de agua.</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Horario: Puede variar</small>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Costo: Gratis</small>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <img class="card-img-top" src="/static/assets/img/actividades/CampamentoChuveje.png" alt="Campamentos Ecológicos">
+                        <div class="card-body">
+                            <h5 class="card-title">Campamentos Ecológicos</h5>
+                            <p class="card-text">Participar en campamentos ecológicos que enseñan sobre la naturaleza local, la sostenibilidad y la importancia de preservar los ecosistemas acuáticos y terrestres.</p>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Horario Recepcion: 10:00 am a 6:00 pm acceso libre</small>
+                        </div>
+                        <div class="card-footer">
+                            <small class="text-muted">Costo: $350.00 mxn por casa de acampar o $750.00 mxn por cabaña</small>
+                        </div>
+                    </div>
+                </div>
+                `;
             }
         });
     </script>
 </body>
+
 </html>
