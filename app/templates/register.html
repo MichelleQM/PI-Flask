@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Guia Turistica</title>
+    <title>Register - QuerétaroDescubre</title>
+    <!-- Añadimos el enlace a la fuente Pacifico desde Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
         body {
@@ -11,7 +12,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: url('/static/assets/img/home-bg.jpg');
+            background-image: url('/assets/img/post-bg.jpg');
             background-size: cover;
             font-family: 'Arial', sans-serif;
             margin: 0;
@@ -33,7 +34,7 @@
         }
         .container h3 {
             margin-bottom: 20px;
-            font-size: 20px;
+            font-size: 17px;
             color: #333;
         }
         .container input {
@@ -78,24 +79,24 @@
 </head>
 <body>
     <div class="container">
-        <h2>Guia Turistica</h2>
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <div class="alert alert-danger">
-                    {% for message in messages %}
-                        <p>{{ message }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        {% endwith %}
-        <form method="POST">
-            <input type="email" id="correo" name="correo" placeholder="Correo" required>
-            <input type="password" id="password" name="password" placeholder="Contraseña" required>
-            <button type="submit">Iniciar sesión</button>
+        <h2>¡Crea tu cuenta!</h2>
+        <h3>¡Descubre las actividades que te esperan!</h3>
+        <form method="POST" action="{{ url_for('register') }}">
+            <div class="form-group">
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Nombre" required>
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Apellido" required>
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" id="correo" name="correo" placeholder="Correo" required>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="contrasena" name="contrasena" placeholder="Contrasena" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Registrarse</button>
         </form>
-        <div class="signup-link">
-            <p>¿No tienes una cuenta? <a href="{{ url_for('register') }}">Regístrate aquí</a>.</p>
-        </div>
+        <p>¿Ya tienes una cuenta? <a href="{{ url_for('login') }}">Inicia sesión aquí</a>.</p>
     </div>
 </body>
 </html>

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
+<<<<<<< Updated upstream
     <file url="file://$PROJECT_DIR$" libraries="{font-awesome, tailwindcss}" />
+=======
+    <file url="file://$PROJECT_DIR$" libraries="{font-awesome, jquery-3.5.1.slim, jquery-3.6.0, tailwindcss}" />
+>>>>>>> Stashed changes
   </component>
 </project>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< Updated upstream:templates/index.html
     <head>
         <style>
             .container h5 {
@@ -42,6 +43,87 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/contact">Comentarios</a></li>
                         {% if session.get('user_id') %}
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/logout">Cerrar sesión</a></li>
+=======
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>QuerétaroDescubre</title>
+    <style>
+        /* Estilos personalizados */
+        .container h4 {
+            margin-bottom: 20px;
+            font-size: 35px;
+            color: #ffffff;
+            /* Aplicamos la fuente Pacifico solo al h2 que contiene "Guia Turistica" */
+            font-family: 'Pacifico', cursive;
+        }
+
+        .post-title {
+            font-family: 'Poppins', sans-serif; /* Cambia la fuente para el título */
+            font-size: 2.5em; /* Ajusta el tamaño del título */
+            color: #2c3e50; /* Color del texto del título */
+            margin-bottom: 20px; /* Espacio debajo del título */
+        }
+        .post-subtitle {
+            font-family: 'Arial'; /* Cambia la fuente para el subtítulo */
+            font-size: 1.21em; /* Ajusta el tamaño del subtítulo */
+            color: #34495e; /* Color del texto del subtítulo */
+            line-height: 1.5; /* Altura de línea para mejor legibilidad */
+            text-align: justify; /* Justifica el texto */
+            margin-bottom: 20px; /* Espacio debajo del subtítulo */
+            font-weight: normal;
+        }
+        /* Estilos para los bloques de texto e imagen */
+        .post-preview {
+            display: flex;
+            flex-direction: column; /* Cambia la dirección del flexbox a columna */
+            align-items: center; /* Centra los elementos en el eje vertical */
+            margin-bottom: 40px; /* Ajusta el espacio entre las secciones */
+        }
+        .post-preview .post-content {
+            max-width: 600px; /* Ancho máximo del contenido */
+            text-align: center; /* Centra el texto */
+            margin-bottom: 20px; /* Espacio debajo del contenido */
+        }
+        .post-preview .post-image {
+            width: 100%;
+            max-width: 600px; /* Ancho máximo de la imagen */
+            height: auto;
+        }
+        .post-preview .post-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px; /* Bordes redondeados para las imágenes */
+        }
+    </style>
+    <link rel="icon" type="image/x-icon" href="static/assets/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="static/css/styles.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="templates/index.html"><h4>QuerétaroDescubre</h4></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto py-4 py-lg-0">
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/about">Actividades</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/post">Estadía</a></li>
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/contact">Comentarios</a></li>
+                    {% if session.get('user_id') %}
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/logout">Cerrar sesión</a></li>
+>>>>>>> Stashed changes:app/templates/index.html
                     {% else %}
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/login">Iniciar sesión</a></li>
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/register">Registrarse</a></li>
@@ -49,6 +131,7 @@
                     </ul>
                 </div>
             </div>
+<<<<<<< Updated upstream:templates/index.html
         </nav>
         <!-- Page Header-->
         <header class="masthead" style="background-image: url('static/assets/img/home-bg.jpg')">
@@ -59,6 +142,18 @@
                             <h1>Guia Turistica</h1>
                             <span class="subheading"></span>
                         </div>
+=======
+        </div>
+    </nav>
+    <!-- Page Header-->
+    <header class="masthead" style="background-image: url('static/assets/img/home-bg.jpg')">
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="site-heading">
+                        <h1>QuerétaroDescubre</h1>
+                        <span class="subheading"></span>
+>>>>>>> Stashed changes:app/templates/index.html
                     </div>
                 </div>
             </div>

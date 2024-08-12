@@ -1,15 +1,35 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
-import pyodbc
+import mysql.connector
 from werkzeug.security import generate_password_hash, check_password_hash
-from config import Config
+#from config import Config
 from datetime import datetime
 
 app = Flask(__name__)
+<<<<<<< Updated upstream:App.py
 app.config.from_object(Config)  # Carga la configuración desde la clase Config
 
 def get_db_connection():
     connection = pyodbc.connect(app.config['CONNECTION_STRING'])
     return connection
+=======
+#app.config.from_object(Config)  # Cargar la configuración desde la clase Config
+
+
+def get_db_connection():
+    try:
+        connection = mysql.connector.connect(
+            host='mysql',  # Cambiado de MYSQL_HOST a host
+            user='root',       # Cambiado de USERNAME a user
+            password='root',
+            database='Guiatu2'  # Cambiado de DATABASE a database
+        )
+        return connection
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+        raise
+
+
+>>>>>>> Stashed changes:app/App.py
 
 @app.route('/')
 def index():
@@ -18,30 +38,33 @@ def index():
 
 @app.route('/post')
 def post():
-    conn = get_db_connection()  # Usa la función get_db_connection
-    cursor = conn.cursor()
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
     cursor.execute('SELECT id_destino, nombre_destino FROM Destinos')
     places = cursor.fetchall()
     cursor.close()
     conn.close()
     return render_template('postDemo.html', places=places)
 
+
 @app.route('/hoteles', methods=['GET'])
 def hoteles():
     id_destino = request.args.get('id_destino', type=int)
-    conn = get_db_connection()  # Usa la función get_db_connection
-    cursor = conn.cursor()
-    cursor.execute('SELECT nombre_hotel, descripcion, url_pagina, url_img, dato1, dato2 FROM Hoteles WHERE id_destino = ?', (id_destino,))
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute(
+        'SELECT nombre_hotel, descripcion, url_pagina, url_img, dato1, dato2 FROM Hoteles WHERE id_destino = %s',
+        (id_destino,))
     hoteles = cursor.fetchall()
     cursor.close()
     conn.close()
     hoteles_list = [{
-        'nombre_hotel': hotel[0],
-        'descripcion': hotel[1],
-        'url_pagina': hotel[2],
-        'url_img': hotel[3],
-        'dato1': hotel[4],
-        'dato2': hotel[5]
+        'nombre_hotel': hotel['nombre_hotel'],
+        'descripcion': hotel['descripcion'],
+        'url_pagina': hotel['url_pagina'],
+        'url_img': hotel['url_img'],
+        'dato1': hotel['dato1'],
+        'dato2': hotel['dato2']
     } for hotel in hoteles]
     return jsonify(hoteles_list)
 
@@ -58,8 +81,25 @@ def comentarios():
 
 @app.route('/about')
 def about():
+<<<<<<< Updated upstream:App.py
     return render_template('about.html')
+=======
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("SELECT id_destino, nombre_destino FROM Destinos")
+    destinos = cursor.fetchall()
+    connection.close()
 
+    destinos_list = [
+        {
+            "id_destino": row['id_destino'],
+            "nombre_destino": row['nombre_destino']
+        }
+        for row in destinos
+    ]
+    return render_template('about.html', destinos=destinos_list)
+
+>>>>>>> Stashed changes:app/App.py
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -67,23 +107,19 @@ def login():
         correo = request.form['correo']
         password = request.form['password']
         connection = get_db_connection()
-        cursor = connection.cursor()
-        cursor.execute("SELECT * FROM Usuarios WHERE correo = ?", (correo,))
+        cursor = connection.cursor(dictionary=True)
+        cursor.execute("SELECT * FROM Usuarios WHERE correo = %s", (correo,))
         user = cursor.fetchone()
         connection.close()
 
         if user:
-            # Para depuración: imprimir el hash de la contraseña y la entrada del usuario
-            print(f"Hash en la base de datos: {user[4]}")
-            print(f"Contraseña ingresada: {password}")
-
-            if check_password_hash(user[4], password):
-                session['user_id'] = user[0]
-                session['user_name'] = user[1]
-                # Registrar la fecha y hora de inicio de sesión
+            if check_password_hash(user['contrasena'], password):
+                session['user_id'] = user['id_usuario']
+                session['user_name'] = user['nombre']
                 connection = get_db_connection()
                 cursor = connection.cursor()
-                cursor.execute("INSERT INTO Login (id_usuario, login_date) VALUES (?, ?)", (user[0], datetime.now()))
+                cursor.execute("INSERT INTO Login (id_usuario, login_date) VALUES (%s, %s)",
+                               (user['id_usuario'], datetime.now()))
                 connection.commit()
                 connection.close()
                 return redirect(url_for('index'))
@@ -101,13 +137,13 @@ def register():
         nombre = request.form['nombre']
         apellido = request.form['apellido']
         correo = request.form['correo']
-        contraseña = request.form['contraseña']
-        hashed_password = generate_password_hash(contraseña, method='pbkdf2:sha256')
+        contrasena = request.form['contrasena']
+        hashed_password = generate_password_hash(contrasena, method='pbkdf2:sha256')
 
         connection = get_db_connection()
         cursor = connection.cursor()
         cursor.execute(
-            "INSERT INTO Usuarios (nombre, apellido, correo, contraseña, fecha_registro) VALUES (?, ?, ?, ?, GETDATE())",
+            "INSERT INTO Usuarios (nombre, apellido, correo, contrasena, fecha_registro) VALUES (%s, %s, %s, %s, NOW())",
             (nombre, apellido, correo, hashed_password))
         connection.commit()
         connection.close()
@@ -126,7 +162,7 @@ def logout():
 @app.route('/get_destinations', methods=['GET'])
 def get_destinations():
     connection = get_db_connection()
-    cursor = connection.cursor()
+    cursor = connection.cursor(dictionary=True)
     cursor.execute("SELECT id_destino, nombre_destino, descripcion FROM Destinos")
     destinos = cursor.fetchall()
 
@@ -140,10 +176,10 @@ def get_destinations():
 
     destinations_list = [
         {
-            "id": row[0],
-            "name": row[1],
-            "description": row[2],
-            "image": images.get(row[0], "placeholder.jpg")  # Placeholder por defecto
+            "id": row['id_destino'],
+            "name": row['nombre_destino'],
+            "description": row['descripcion'],
+            "image": images.get(row['id_destino'], "placeholder.jpg")
         }
         for row in destinos]
     return jsonify(destinations_list)
@@ -169,9 +205,10 @@ def submit_comment():
     cursor = connection.cursor()
     cursor.execute("""
         INSERT INTO Opiniones (id_usuario, id_destino, comentario, calificacion, fecha_opinion)
-        VALUES (?, ?, ?, ?, ?)
+        VALUES (%s, %s, %s, %s, %s)
     """, (id_usuario, id_destino, comment, rating, fecha_opinion))
     connection.commit()
+    connection.close()
 
     return jsonify({"status": "success"})
 
@@ -179,23 +216,23 @@ def submit_comment():
 @app.route('/get_comments/<int:id_destino>', methods=['GET'])
 def get_comments(id_destino):
     connection = get_db_connection()
-    cursor = connection.cursor()
+    cursor = connection.cursor(dictionary=True)
     cursor.execute("""
         SELECT Opiniones.id_opinion, Opiniones.comentario, Opiniones.calificacion, Opiniones.fecha_opinion, Usuarios.nombre
         FROM Opiniones
         JOIN Usuarios ON Opiniones.id_usuario = Usuarios.id_usuario
-        WHERE Opiniones.id_destino = ?
+        WHERE Opiniones.id_destino = %s
     """, (id_destino,))
     comments = cursor.fetchall()
     connection.close()
 
     comments_list = [
         {
-            "id_opinion": row[0],
-            "comment": row[1],
-            "rating": row[2],
-            "date": row[3],
-            "user_name": row[4]
+            "id_opinion": row['id_opinion'],
+            "comment": row['comentario'],
+            "rating": row['calificacion'],
+            "date": row['fecha_opinion'],
+            "user_name": row['nombre']
         }
         for row in comments
     ]
@@ -217,18 +254,16 @@ def edit_comment():
     connection = get_db_connection()
     cursor = connection.cursor()
 
-    # Check if the comment belongs to the logged-in user
-    cursor.execute("SELECT id_usuario FROM Opiniones WHERE id_opinion = ?", (id_opinion,))
+    cursor.execute("SELECT id_usuario FROM Opiniones WHERE id_opinion = %s", (id_opinion,))
     comment_owner = cursor.fetchone()
-    if not comment_owner or comment_owner[0] != session['user_id']:
+    if not comment_owner or comment_owner['id_usuario'] != session['user_id']:
         connection.close()
         return jsonify({"status": "error", "message": "You can only edit your own comments"}), 403
 
-    # Update the comment
     cursor.execute("""
         UPDATE Opiniones
-        SET comentario = ?
-        WHERE id_opinion = ?
+        SET comentario = %s
+        WHERE id_opinion = %s
     """, (new_comment, id_opinion))
     connection.commit()
     connection.close()
@@ -236,9 +271,54 @@ def edit_comment():
     return jsonify({"status": "success"})
 
 
+<<<<<<< Updated upstream:App.py
+=======
+@app.route('/get_activities/<int:id_destino>', methods=['GET'])
+def get_activities(id_destino):
+    connection = get_db_connection()
+    cursor = connection.cursor(dictionary=True)
+    cursor.execute("""
+        SELECT id_actividad, nombre_actividad, descripcion, duracion, costos
+        FROM Actividades
+        WHERE id_destino = %s
+    """, (id_destino,))
+    activities = cursor.fetchall()
+    connection.close()
+
+    images = {
+        1: "Bernal.webp",
+        2: "tallerBernal.png",
+        3: "vinelloBernal.png",
+        4: "AguaTermalesSanJoaquin.png",
+        5: "LuciernagasSanJoaquin.jpg",
+        6: "ReforestacionSanJoaquin.png",
+        7: "AveSierraGorda.jpg",
+        8: "sierraGorda.png",
+        9: "EcoturismoSierra.png",
+        10: "LimpiezaSenderoChuveje.png",
+        11: "ConservacionAguaChuveje.png",
+        12: "CampamentoChuveje.png"
+    }
+
+    activities_list = [
+        {
+            "id_actividad": row['id_actividad'],
+            "nombre_actividad": row['nombre_actividad'],
+            "descripcion": row['descripcion'],
+            "duracion": row['duracion'],
+            "costos": row['costos'],
+            "image": url_for('static', filename='assets/' + images.get(row['id_actividad'], "placeholder.jpg"))
+        }
+        for row in activities
+    ]
+    return jsonify(activities_list)
+
+
+>>>>>>> Stashed changes:app/App.py
 @app.errorhandler(404)
 def paginanotfound(e):
     return 'Revisa tu sintaxis: No encontré nada'
 
+
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
+<<<<<<< Updated upstream
     <file url="file://$PROJECT_DIR$/db_Proyecto.sql" dialect="TSQL" />
+=======
+    <file url="file://$PROJECT_DIR$/database_pi.sql" dialect="MySQL" />
+>>>>>>> Stashed changes
   </component>
 </project>
